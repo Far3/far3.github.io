@@ -22,6 +22,19 @@
   
   <link rel="stylesheet" href="/css/style.css">
   
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-59009416-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
 
 </head>
 
@@ -52,9 +65,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://franklynroth.me"></form>
@@ -65,9 +78,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Types" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Fields" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/08/Types/" class="article-date">
+    <a href="/2016/06/08/Fields/" class="article-date">
   <time datetime="2016-06-08T06:00:00.000Z" itemprop="datePublished">2016-06-08</time>
 </a>
     
@@ -79,7 +92,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/08/Types/">Types, Classes and Objects.</a>
+      <a class="article-title" href="/2016/06/08/Fields/">Fields</a>
     </h1>
   
 
@@ -87,19 +100,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>In OOP every object is of a certain type. Whenever you use <code>int</code>, <code>double</code>, <code>string</code> etc these are types. You can create your own objects for a particular type as well. This is done with using a class.<br></p>
-
-<p></p><p>An easy way to think of a class is a cookie cutter. The cookie cutter is the class or template on how to make cookies. It is not a cookie itself, just a template. Classes are templates for amking objects of a particular type. Each time a cookie is create it is called an instance of that Cookie class. You can make many copies of cookies over and ocer and can make them a little different by changing their attributes.</p>
-<p>
-
-</p><p></p><p><br>Typically you would declare a class with an uppercase letter.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">namespace Bake</div><div class="line">&#123;</div><div class="line">  class Cookie</div><div class="line">  &#123;</div><div class="line">    public Void Main()</div><div class="line">    &#123;</div><div class="line">      Cookie cookie = = new Cookie();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p></p><p>The above code create a new variable called cookie and assigns it to a new Cookie object. Typically you want to keep the variables a meaningful name. This is how to instnatiate an object from the Cookie class.<br></p><p></p>
-<p></p><p>So to recap</p><br>  <ul><br>  <li>“Frank” is an object of type string.</li><br>  <li>The <code>new</code> keyword is used to create a new object or instance of that class</li><br>  <li>In a GUI, each individual button is a distinct object.</li><br>  <li>Classes are templates from which objects are created from</li><br></ul><p></p>
+        <p>When assind fields or properties to a class you need to think about what attributes that a class has. Ideally you want to set the minimal amount of attributes. A super simple example would be a map. It can be divided into X for the width and Y for the height. You start adding fields by listing the protection level, the type and then finally the name.</p><br><p><br>Every field in a class has an accessibility level, meanind how protected they make the declared properties. Their are private, protected and public.<br></p><br><ul><br>  <li>Public: The field can be accessed by any method in any class.</li><br>  <li>Private: The field can be accessed by only the same class they were declared in. This is the default value.</li><br>  <li>Protected: The field can be accessed by only the current class and subclasses</li><br></ul><br><br><code>private int Width</code><br><code>private int Height</code><br><br><p>Next up we will cover how to use these fields with constructors.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://franklynroth.me/2016/06/08/Types/" data-id="cj0ivjn5z0025m4utusq381st" class="article-share-link">Share</a>
+      <a data-url="https://franklynroth.me/2016/06/08/Fields/" data-id="cj0ivwh3m000fwgutlnwzhvi8" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oop/">oop</a></li></ul>
@@ -147,7 +153,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://franklynroth.me/2016/06/01/Namespaces/" data-id="cj0ivjn32000om4utu87ux9ze" class="article-share-link">Share</a>
+      <a data-url="https://franklynroth.me/2016/06/01/Namespaces/" data-id="cj0ivwh42000swgut78kff104" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oop/">oop</a></li></ul>
@@ -195,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://franklynroth.me/2016/05/25/OOP-Basics/" data-id="cj0ivjn3j000um4utr85goos1" class="article-share-link">Share</a>
+      <a data-url="https://franklynroth.me/2016/05/25/OOP-Basics/" data-id="cj0ivwh42000twgut1o8vgj71" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oop/">oop</a></li></ul>
@@ -238,7 +244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://franklynroth.me/2016/05/18/Html-entities/" data-id="cj0ivjn1a000dm4utjoifwmyc" class="article-share-link">Share</a>
+      <a data-url="https://franklynroth.me/2016/05/18/Html-entities/" data-id="cj0ivwh3m000jwgut13fk3bx2" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
@@ -352,7 +358,7 @@ Now lets look at another example, based on what you saw above you would think th
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://franklynroth.me/2016/05/11/CSS-specificity/" data-id="cj0ivjn1a0008m4utqqhpsi0q" class="article-share-link">Share</a>
+      <a data-url="https://franklynroth.me/2016/05/11/CSS-specificity/" data-id="cj0ivwh360007wgut285mtdia" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
@@ -405,7 +411,7 @@ Now lets look at another example, based on what you saw above you would think th
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://franklynroth.me/2016/04/19/Less-basics/" data-id="cj0ivjn2z000lm4utg1xndesx" class="article-share-link">Share</a>
+      <a data-url="https://franklynroth.me/2016/04/19/Less-basics/" data-id="cj0ivwh42000owgutflpb4j5u" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/basics/">basics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less/">less</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/preprocessor/">preprocessor</a></li></ul>
@@ -485,7 +491,7 @@ Now lets look at another example, based on what you saw above you would think th
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://franklynroth.me/2016/04/19/Intermediate-git-1/" data-id="cj0ivjn2x000km4utza5u5iau" class="article-share-link">Share</a>
+      <a data-url="https://franklynroth.me/2016/04/19/Intermediate-git-1/" data-id="cj0ivwh3m000kwgutc1zvejg3" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sourcecontrol/">sourcecontrol</a></li></ul>
@@ -573,7 +579,7 @@ Now lets look at another example, based on what you saw above you would think th
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://franklynroth.me/2016/04/14/Expand-collapse-toggle-button/" data-id="cj0ivjn1a0009m4ut9vzzjxxg" class="article-share-link">Share</a>
+      <a data-url="https://franklynroth.me/2016/04/14/Expand-collapse-toggle-button/" data-id="cj0ivwh36000cwguttpohxogv" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/">bootstrap</a></li></ul>
@@ -629,7 +635,7 @@ Now lets look at another example, based on what you saw above you would think th
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://franklynroth.me/2016/04/07/Blog-post-revisisted/" data-id="cj0ivjn0u0005m4ut9i9yvozh" class="article-share-link">Share</a>
+      <a data-url="https://franklynroth.me/2016/04/07/Blog-post-revisisted/" data-id="cj0ivwh2r0003wgutfi1ii7rh" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/motivation/">motivation</a></li></ul>
@@ -688,7 +694,7 @@ Now lets look at another example, based on what you saw above you would think th
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://franklynroth.me/2016/03/03/Accessible-data-tables/" data-id="cj0ivjn0u0004m4ut47pvx3mz" class="article-share-link">Share</a>
+      <a data-url="https://franklynroth.me/2016/03/03/Accessible-data-tables/" data-id="cj0ivwh2b0000wgutxy43pi8o" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2016/">2016</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/accessibility/">accessibility</a></li></ul>
@@ -714,7 +720,7 @@ Now lets look at another example, based on what you saw above you would think th
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2016/">2016</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Book-Review/">Book Review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accessibility/">accessibility</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/basics/">basics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/border-box/">border-box</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/motivation/">motivation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/naming/">naming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pre-work/">pre-work</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/preprocessor/">preprocessor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sourcecontrol/">sourcecontrol</a></li></ul>
     </div>
@@ -724,7 +730,7 @@ Now lets look at another example, based on what you saw above you would think th
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/2016/" style="font-size: 13.33px;">2016</a> <a href="/tags/Book-Review/" style="font-size: 10px;">Book Review</a> <a href="/tags/accessibility/" style="font-size: 10px;">accessibility</a> <a href="/tags/api/" style="font-size: 10px;">api</a> <a href="/tags/basics/" style="font-size: 10px;">basics</a> <a href="/tags/book/" style="font-size: 13.33px;">book</a> <a href="/tags/bootstrap/" style="font-size: 10px;">bootstrap</a> <a href="/tags/border-box/" style="font-size: 10px;">border-box</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/motivation/" style="font-size: 10px;">motivation</a> <a href="/tags/naming/" style="font-size: 10px;">naming</a> <a href="/tags/oop/" style="font-size: 20px;">oop</a> <a href="/tags/pre-work/" style="font-size: 13.33px;">pre-work</a> <a href="/tags/preprocessor/" style="font-size: 10px;">preprocessor</a> <a href="/tags/sourcecontrol/" style="font-size: 10px;">sourcecontrol</a>
     </div>
@@ -743,7 +749,7 @@ Now lets look at another example, based on what you saw above you would think th
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -780,7 +786,7 @@ Now lets look at another example, based on what you saw above you would think th
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Franklyn Roth<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
