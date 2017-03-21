@@ -51,7 +51,7 @@ ga('send', 'pageview');
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Webd eveloper problems and solutions. Open to freelance work.</a>
+          <a href="/" id="subtitle">Web developer problems and solutions. Open to freelance work.</a>
         </h2>
       
     </div>
@@ -68,7 +68,7 @@ ga('send', 'pageview');
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://franklynroth.me"></form>
@@ -78,55 +78,6 @@ ga('send', 'pageview');
 </header>
       <div class="outer">
         <section id="main">
-  
-    <article id="post-Fixed-header-on-scroll" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/05/31/Fixed-header-on-scroll/" class="article-date">
-  <time datetime="2013-05-31T06:00:00.000Z" itemprop="datePublished">2013-05-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/05/31/Fixed-header-on-scroll/">How to create: Fixed header on scroll.</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>I had a project at work that one of the designers wanted to load search results(Conference Rooms) below a search bar. As the user scrolled down the label “Results” would stay at the top of the screen. This was inspired by the phone scrolling that many of us see as we scroll down our contact lists on iPhone, windows or android devices.</p>
-<p>I found plenty of examples on how to do a fixed header on page load, but very few examples of how to incorporate a fixed header once the user scrolled past a certain point. After an “aha” moment while taking a walk around the office park I thought their must be some way to track the scroll position using JavaScript and then use a conditional to display the fixed header when appropriate.</p>
-<p>Below was the completed code needed.<br><figure class="highlight plain"><figcaption><span>javascript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// Show / Hide fixed label on scroll</div><div class="line">	$(&apos;.toolbar&apos;).scroll(function (e) &#123;</div><div class="line">    //console.info(e.currentTarget.scrollTop);</div><div class="line">		if (e.currentTarget.scrollTop &gt;= 130) &#123;</div><div class="line">			$(&apos;.results-label&apos;).addClass(&apos;fixedSimilarLabel&apos;);</div><div class="line">		&#125;</div><div class="line">		else &#123;		</div><div class="line">			$(&apos;.results-label&apos;).removeClass(&apos;fixedSimilarLabel&apos;);</div><div class="line">		&#125;</div><div class="line">	&#125;);</div></pre></td></tr></table></figure><br>I found out about <a href="https://api.jquery.com/scroll/" target="_blank" rel="external">jQuery scroll function</a>{:target=”_blank”} and tracked the event as I scrolled using <code>console.log</code>, which then led me to <code>e.CurrentTarget.</code><a href="https://api.jquery.com/scrollTop/" target="_blank" rel="external">ScrollTop</a>{:target=”_blank”} to get the current vertical position of the scroll bar for the element.</p>
-<figure><br>    <a href="/images/e.currentTarget.PNG"><img src="/images/e.currentTarget.PNG"></a><br>    <figcaption>Moving down the event to find currentTarget and finally ScrollTop</figcaption><br></figure>
-
-<p>The next step was to create a conditional based on where the scroll bar was. If it scrolled past where I wanted to I would use the <a href="https://api.jquery.com/addclass/" target="_blank" rel="external">addClass()</a>{:target=”_blank”} and <a href="https://api.jquery.com/removeclass/" target="_blank" rel="external">removeClass()</a>{:target=”_blank”} functions. Its not super important how you style it, ust that you put <code>position:fixed</code> and it looks as seemless as possible when you scroll down. You can edit the left and right values as well as the width to make it work for your requirements.</p>
-<p><figure><br>    <a href="/images/fixedcss.PNG"><img src="/images/fixedcss.PNG"></a><br>    <figcaption>My styles for the fixed label</figcaption><br></figure></p>
-<p></p><p data-height="500" data-theme-id="0" data-slug-hash="pjEzeK" data-default-tab="result" data-user="franklynroth" class="codepen">See the Pen <a href="http://codepen.io/franklynroth/pen/pjEzeK/" target="_blank" rel="external">Sticky Header on Scroll</a> by Franklyn (<a href="http://codepen.io/franklynroth" target="_blank" rel="external">@franklynroth</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-
-<p>Of course once I thought of the solution and built it. I was able to find many more examples. <a href="https://css-tricks.com/scroll-fix-content/" target="_blank" rel="external">scroll-fix-content</a>{:target=”_blank”}, <a href="http://stackoverflow.com/questions/18382496/sticky-header-after-scrolling-down" target="_blank" rel="external">sticky-header-after-scrolling-down</a>{:target=”_blank”}, <a href="http://stackoverflow.com/questions/24545052/sticky-header-after-some-scrolling" target="_blank" rel="external">sticky-header-after-some-scrolling</a>{:target=”_blank”}<br>Either way, I learned a lot by figuring out how to build this myself. Hope this code helps.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://franklynroth.me/2013/05/31/Fixed-header-on-scroll/" data-id="cj0iwdvw3000hucut22c47fyb" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/api/">api</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jquery/">jquery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pre-work/">pre-work</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
   
     <article id="post-Border-box" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -165,10 +116,63 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://franklynroth.me/2013/05/31/Border-box/" data-id="cj0iwdvvn0005ucut77lkup51" class="article-share-link">Share</a>
+      <a data-url="https://franklynroth.me/2013/05/31/Border-box/" data-id="cj0iy66jb00051suts00x5gl2" class="article-share-link">Delen</a>
+      
+        <a href="https://franklynroth.me/2013/05/31/Border-box/#disqus_thread" class="article-comment-link">Commentaren</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/border-box/">border-box</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pre-work/">pre-work</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Fixed-header-on-scroll" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/05/31/Fixed-header-on-scroll/" class="article-date">
+  <time datetime="2013-05-31T06:00:00.000Z" itemprop="datePublished">2013-05-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/05/31/Fixed-header-on-scroll/">How to create: Fixed header on scroll.</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>I had a project at work that one of the designers wanted to load search results(Conference Rooms) below a search bar. As the user scrolled down the label “Results” would stay at the top of the screen. This was inspired by the phone scrolling that many of us see as we scroll down our contact lists on iPhone, windows or android devices.</p>
+<p>I found plenty of examples on how to do a fixed header on page load, but very few examples of how to incorporate a fixed header once the user scrolled past a certain point. After an “aha” moment while taking a walk around the office park I thought their must be some way to track the scroll position using JavaScript and then use a conditional to display the fixed header when appropriate.</p>
+<p>Below was the completed code needed.<br><figure class="highlight plain"><figcaption><span>javascript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// Show / Hide fixed label on scroll</div><div class="line">	$(&apos;.toolbar&apos;).scroll(function (e) &#123;</div><div class="line">    //console.info(e.currentTarget.scrollTop);</div><div class="line">		if (e.currentTarget.scrollTop &gt;= 130) &#123;</div><div class="line">			$(&apos;.results-label&apos;).addClass(&apos;fixedSimilarLabel&apos;);</div><div class="line">		&#125;</div><div class="line">		else &#123;		</div><div class="line">			$(&apos;.results-label&apos;).removeClass(&apos;fixedSimilarLabel&apos;);</div><div class="line">		&#125;</div><div class="line">	&#125;);</div></pre></td></tr></table></figure><br>I found out about <a href="https://api.jquery.com/scroll/" target="_blank" rel="external">jQuery scroll function</a>{:target=”_blank”} and tracked the event as I scrolled using <code>console.log</code>, which then led me to <code>e.CurrentTarget.</code><a href="https://api.jquery.com/scrollTop/" target="_blank" rel="external">ScrollTop</a>{:target=”_blank”} to get the current vertical position of the scroll bar for the element.</p>
+<figure><br>    <a href="/images/e.currentTarget.PNG"><img src="/images/e.currentTarget.PNG"></a><br>    <figcaption>Moving down the event to find currentTarget and finally ScrollTop</figcaption><br></figure>
+
+<p>The next step was to create a conditional based on where the scroll bar was. If it scrolled past where I wanted to I would use the <a href="https://api.jquery.com/addclass/" target="_blank" rel="external">addClass()</a>{:target=”_blank”} and <a href="https://api.jquery.com/removeclass/" target="_blank" rel="external">removeClass()</a>{:target=”_blank”} functions. Its not super important how you style it, ust that you put <code>position:fixed</code> and it looks as seemless as possible when you scroll down. You can edit the left and right values as well as the width to make it work for your requirements.</p>
+<p><figure><br>    <a href="/images/fixedcss.PNG"><img src="/images/fixedcss.PNG"></a><br>    <figcaption>My styles for the fixed label</figcaption><br></figure></p>
+<p></p><p data-height="500" data-theme-id="0" data-slug-hash="pjEzeK" data-default-tab="result" data-user="franklynroth" class="codepen">See the Pen <a href="http://codepen.io/franklynroth/pen/pjEzeK/" target="_blank" rel="external">Sticky Header on Scroll</a> by Franklyn (<a href="http://codepen.io/franklynroth" target="_blank" rel="external">@franklynroth</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>Of course once I thought of the solution and built it. I was able to find many more examples. <a href="https://css-tricks.com/scroll-fix-content/" target="_blank" rel="external">scroll-fix-content</a>{:target=”_blank”}, <a href="http://stackoverflow.com/questions/18382496/sticky-header-after-scrolling-down" target="_blank" rel="external">sticky-header-after-scrolling-down</a>{:target=”_blank”}, <a href="http://stackoverflow.com/questions/24545052/sticky-header-after-some-scrolling" target="_blank" rel="external">sticky-header-after-some-scrolling</a>{:target=”_blank”}<br>Either way, I learned a lot by figuring out how to build this myself. Hope this code helps.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://franklynroth.me/2013/05/31/Fixed-header-on-scroll/" data-id="cj0iy66jr000g1sutbcwnalws" class="article-share-link">Delen</a>
+      
+        <a href="https://franklynroth.me/2013/05/31/Fixed-header-on-scroll/#disqus_thread" class="article-comment-link">Commentaren</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/api/">api</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jquery/">jquery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pre-work/">pre-work</a></li></ul>
 
     </footer>
   </div>
@@ -197,7 +201,7 @@ ga('send', 'pageview');
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a></li></ul>
     </div>
@@ -207,7 +211,7 @@ ga('send', 'pageview');
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
@@ -257,6 +261,18 @@ ga('send', 'pageview');
   
 </nav>
     
+<script>
+  var disqus_shortname = 'franklynroth';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
