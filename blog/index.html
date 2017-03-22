@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Franklyn Roth&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Franklyn Roth's Blog">
+<meta property="og:url" content="https://franklynroth.me/blog/index.html">
+<meta property="og:site_name" content="Franklyn Roth's Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Franklyn Roth's Blog">
+<meta name="twitter:creator" content="@franklynroth">
+  
+    <link rel="alternate" href="/atom.xml" title="Franklyn Roth&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-59009416-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Franklyn Roth&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">Web developer problems and solutions. Open to freelance work.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/blog">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://franklynroth.me/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Android-s-keyboard-messes-with-viewport-dimension" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2017/03/19/Android-s-keyboard-messes-with-viewport-dimension/" class="article-date">
+  <time datetime="2017-03-20T02:20:00.000Z" itemprop="datePublished">2017-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/03/19/Android-s-keyboard-messes-with-viewport-dimension/">Android&#39;s keyboard messes with viewport dimension</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>There is a little quirk on how the android soft-keyboard totally messes with css orientation rules. It’s probably a lesser known gotcha, but it tripped me up longer than I would have liked. Here I will explain it and how to get around it.</p>
+<p>I was targeting a very specific set of devices using a media query of <code>(orientation: portait)</code> whenever the user selected the search bar the on screen soft-keyboard would open up on the android tablet and it would then break my styles.</p>
+<p>I reached out to my team and another developer noticed that when the height was changed it would also break the layout in the same manner as the keyboard popping up. I did some google fu and came accross two excellent links.</p>
+<ul>
+<li><p><a href="http://stackoverflow.com/questions/8883163/css-media-query-soft-keyboard-breaks-css-orientation-rules-alternative-solut" target="_blank" rel="external">stackoverflow-soft-keyboard-breaks-orientation</a></p>
+</li>
+<li><p><a href="https://web.archive.org/web/20141109111220/http://abouthalf.com/development/orientation-media-query-challenges-in-android-browsers" target="_blank" rel="external">android-bowser-orientation-change</a></p>
+</li>
+</ul>
+<p>It ultimately has to do with how orientation is calculated as I was using <code>(orientation: portrait)</code>. The W3 calculates orientation portrait by checking if the height or width is greater, not the actual device orentation itself. So you could still have the device upright but if the height is less than the width you are in “landscape” mode.</p>
+<p><a href="https://www.w3.org/TR/css3-mediaqueries/#orientation" target="_blank" rel="external">W3.org says</a><br><strong>The ‘orientation’ media feature is ‘portrait’ when the value of the ‘height’ media feature is greater than or equal to the value of the ‘width’ media feature. Otherwise ‘orientation’ is ‘landscape’.</strong></p>
+<p>So when the keyboard pops up the height is less than the width and it breaks out of the <code>(orientation: portrait)</code> media query. iOS doesn’t have this issue because the keyboard is overlaid over the browser window vs resizing the actual browser.</p>
+<p>So the solution is to stuff the styles that you want to still be applied in an <code>(orientation: landscape)</code> media query.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://franklynroth.me/blog/blog/2017/03/19/Android-s-keyboard-messes-with-viewport-dimension/" data-id="cj0k9kaoy0003cgutcel160k2" class="article-share-link">Share</a>
+      
+        <a href="https://franklynroth.me/blog/blog/2017/03/19/Android-s-keyboard-messes-with-viewport-dimension/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Learning-react-resources" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2017/03/06/Learning-react-resources/" class="article-date">
+  <time datetime="2017-03-07T03:20:00.000Z" itemprop="datePublished">2017-03-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/03/06/Learning-react-resources/">Resources I am using to learn react</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Currently I am ramping up on a project very soon that is react based. I have no prior experience writing react code and here are a list of resources that I have found most helpful in my learning.</p>
+<ul>
+<li><p>Videos<br><a href="https://www.youtube.com/watch?v=DgVS-zXgMTk" target="_blank" rel="external">Pete Hunt: React - Rethinking Best Practices (updated) - JSConf.Asia 2013</a><br><a href="https://www.youtube.com/playlist?list=PLillGF-RfqbbKWfm3Y_RF57dNGsHnkYqO" target="_blank" rel="external">Learning React,js</a><br><a href="https://reacttraining.com/online/react-fundamentals" target="_blank" rel="external">React Fundamentals</a><br><a href="https://teamtreehouse.com/tracks/learn-react" target="_blank" rel="external">Team Treehouse: React Track</a></p>
+</li>
+<li><p>Articles/Docs<br><a href="https://www.npmjs.com/package/create-react-app" target="_blank" rel="external">Create React App</a><br><a href="https://facebook.github.io/react/" target="_blank" rel="external">https://facebook.github.io/react/</a><br><a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank" rel="external">Thinking in react</a><br><a href="https://hackernoon.com/10-react-mini-patterns-c1da92f068c5#.c3q8f91hw" target="_blank" rel="external">10 React Mini Patterns</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://franklynroth.me/blog/blog/2017/03/06/Learning-react-resources/" data-id="cj0k9kapt000mcgut6gv7iiyu" class="article-share-link">Share</a>
+      
+        <a href="https://franklynroth.me/blog/blog/2017/03/06/Learning-react-resources/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-So-good-they-cant-ignore-you" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/11/23/So-good-they-cant-ignore-you/" class="article-date">
+  <time datetime="2016-11-23T07:00:00.000Z" itemprop="datePublished">2016-11-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/11/23/So-good-they-cant-ignore-you/">So good they can&#39;t ignore you</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>I’ve had this book on my to read list for years, and I had a long weekend dog sitting and was able to finish it in one sitting on the back porch on a beautiful Sunny colorado day. I am definitely on the right path, most of the advice that is relevant to me is toward the beginning part of the book. The building of career capital part. In a few years, the next parts will be more relevant as I try and work remotely full-time.</p>
+<p>The narratives of this book follow a common thread. THe importance of ability ie be good at what you do. To follow in the words of Steve Martin, Be so good they can’t ignore you.</p>
+<p>Rule #1: Don’t follow your passion</p>
+<p>Compelling careers often have complex origins that reject the simple idea that all you have to do is follow your passion.</p>
+<p>Career passions are rare, passion takes time and passion is a side effect of mastery</p>
+<p>Self determination theory is the best understanding science currently has on why some pursuits excite us.</p>
+<p>3 basic psychological needs required to feel intrinsically motivated for your work.</p>
+<ul>
+<li><p>Autonomy: The feeling that you have control over your day, and that your actions are important.</p>
+</li>
+<li><p>Competence: The feeling that you are good at what you do.</p>
+</li>
+<li><p>Relatednedss: The feeling of connection to other people</p>
+</li>
+</ul>
+<p>Working right, trumps finding the right work.</p>
+<p>Passion could be dangerous and has made people leave their jobs with no career capital, yoga example.</p>
+<p>Focus on the craftsman mindset. On what value that you’re producing in your job vs the passion mindset on a focus on what value your job offers you. </p>
+<p>Jordan Tice, guitar player example. Always tried to focus on the process of practicing. </p>
+<p>Think of “How can I be really good?”</p>
+<p>Track the hours that you spend each month, learning something new and building something with that knowledge.</p>
+<p>Turn the attention to the quality that you produce.</p>
+<p><strong>Regardless of how you feel about your job right now, adopting the craftsman mindset will be the foundation on which you’ll build a compelling career.</strong></p>
+<p>The power of career capital</p>
+<p>If you want a great job, then you need to build up rare and valuable skills to offer in return.</p>
+<p>Craftsman mindset…what can I offer the world.</p>
+<p>Traits that define great work. Creativity, impact and control. Now how do you get these traits into your own working life?</p>
+<ul>
+<li><p>THe traits that define great work are rare and valuable</p>
+</li>
+<li><p>Supply and demand says that if you want these traits you need rare and valuable skills to offer in return. Think of these skills are career capital that you can offer. Ie programming, accessibility niche, automated testing, javascript, speaking at seminars</p>
+</li>
+<li><p>The craftsman mindset, with its relentless focus on becoming “so good they can’t ignore you” is a strategy well suited for acquiring career capital. This is why it trumps passion mindset if your goal is to create work you are proud of.</p>
+</li>
+</ul>
+<p>Three traits that disqualify for applying the craftsman mindset</p>
+<ol>
+<li><p>The job has few opportunities to distinguish yourself by developing relevant skills that are rare and valuable.</p>
+</li>
+<li><p>The job focuses on something you think is useless or bad for the world.</p>
+</li>
+<li><p>The job forces you to work with people you really really dislike.</p>
+</li>
+</ol>
+<p>Alex Berger and Mike Jackson example on adopting the craftsman mindset.</p>
+<p>Always seeking feedback on his scripts, just like you should always be seeking feedback on your code with a peer review.</p>
+<p>Basically be serious about doing your job well. Ensure that your attention is focused on the activities that matter.</p>
+<p>Becoming a craftsman..deliberate practice. The difference in strategy that separates average guitar players from stars like jordan tice is not confined to music. </p>
+<p>You need to stretch your ability and receive immediate feedback. Which is the key to successfully acquiring career capital in almost any field.</p>
+<p>Skill stretching deliberate practice.</p>
+<p>10k hour rule made popular by malcolm gladwell.</p>
+<p>Emphasizing serious study: Pouring over books and using teachers to help identify and then eliminate weaknesses.</p>
+<p>Focus on difficult activities, carefully chosen to stretch our abilities where they most need stretching and that provide immediate feedback.</p>
+<p>Deliberate practice to describe a style of serious study, activity designed for the sole purpose of improving specific aspects of an individual’s performance.</p>
+<p>Materials can be deliberately chosen or adapted such that the problems to be solved are at a level that is appropriately challenging.</p>
+<p>Focusing on difficult activities, carefully chosen to stretch your abilities where they most need stretching and that provide immediate feedback.</p>
+<p>If you just show up and work, you will soon hit a performance plateau beyond which you fail to get any better. This is what I think is currently happening with my web development/ programming career.</p>
+<p>Deliberate practice then is the key to quickly becoming so good they can’t ignore you.</p>
+<p>To successfully adopt the craftsman mindset, therefore, we have to approach our jobs in the same way that Jordan approaches his guitar playing or Kasparov approaches his chess playing</p>
+<p>Alex Bergers example of “A never ending quest to get better, it’s like a sport, you have to practice and you have to study.”</p>
+<ol>
+<li><p>Decide what capital market you are in.</p>
+<ol>
+<li><p>WInner take all and auction</p>
+</li>
+<li><p>Programming, the only ability is to write good code.</p>
+</li>
+</ol>
+</li>
+<li><p>Identify your capital type</p>
+</li>
+<li><p>Define ‘good’</p>
+<ol>
+<li><p>Get clear goals. Deliberate practice requires clear goals.</p>
+<ol>
+<li><p>FInish teamtreehouse fullstack JS course.</p>
+</li>
+<li><p>Get a freelance web developer position/contract gig.</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>Stretch and destroy (The current step I am doing). </p>
+</li>
+</ol>
+<p>Doing things we know how to do well is enjoyable, and that is exactly the opposite of what deliberate practice demands. Deliberate practice demands an all effort of focus and concentration. That is what makes it ‘deliberate’ as distinct from the mindless playing of scales or hitting of tennis balls that most people engage in. OR watching beginner programming tutorials over and over again.</p>
+<p>Deliberate practice is not enjoyable. It feels like a stretch. It is an uncomfortable sensation in your head that kinda feels like a physical strain, as if neurons are physically reforming into new configurations. That stretching feeling is the precondition to getting better.</p>
+<p>THis is what you should experience in your own pursuit of ‘good’. If you’re not uncomfortable, then you’re probably stuck and an ‘acceptable’ level and you should seek out more responsibility.</p>
+<p>Now that is only part 1, part 2 is embracing honest and candid feedback. Ie code reviews with senior mentors/teachers.</p>
+<p>Sometimes it’s from harsh feedback where you learn where to retrain your focus in order to continue to make progress.</p>
+<p>Keep a constant stream of feedback coming. Ask advice from people that will tell you what is working and what is not working in your writing.</p>
+<p>Continuous and harsh feedback he received accelerated the growth of his ability.</p>
+<p>Step 5: Be patient</p>
+<p>I thought, if I stay with it for 20 years and anyone who sticks with something for 20 years will be pretty good at it.</p>
+<p>There is an importance of diligence. Without this patient willingness to reject shiny new pursuits, you’ll derail your efforts before you acquire the capital that you need.</p>
+<p>You stretch yourself, day after day, month after month and then finally look up and realize…Hey I’m pretty good at this and people are starting to notice.</p>
+<p>I’m not going to write up the rule #3 and #4 because they are not super relevant to me yet, but they are definitely worth a read if you are at that stage where you’re career capital is at a good level. 2 more years left for me and then I will focus on the additional rules. Until then, thanks for reading.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://franklynroth.me/blog/blog/2016/11/23/So-good-they-cant-ignore-you/" data-id="cj0k9kaq9000ycgutz7458tb8" class="article-share-link">Share</a>
+      
+        <a href="https://franklynroth.me/blog/blog/2016/11/23/So-good-they-cant-ignore-you/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/book/">book</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Mastery" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/11/23/Mastery/" class="article-date">
+  <time datetime="2016-11-23T07:00:00.000Z" itemprop="datePublished">2016-11-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/11/23/Mastery/">Mastery</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>The five master keys</strong></p>
+<ul>
+<li><p>Instruction</p>
+</li>
+<li><p>Practice</p>
+</li>
+<li><p>Surrender</p>
+</li>
+<li><p>Intentionality</p>
+</li>
+<li><p>The Edge</p>
+</li>
+</ul>
+<p><strong>Dealing with change and homeostasis</strong></p>
+<ul>
+<li><p>Be aware of the way homeostasis works</p>
+</li>
+<li><p>Be willing to negotiate with your resistance to change</p>
+</li>
+<li><p>Develop a support system</p>
+</li>
+<li><p>Follow a regular practice</p>
+</li>
+<li><p>Dedicate yourself to lifelong learning</p>
+</li>
+</ul>
+<p><strong>Getting energy for mastery</strong></p>
+<ul>
+<li><p>Maintain physical fitness</p>
+</li>
+<li><p>Acknowledge the negative and accentuate the positive</p>
+</li>
+<li><p>Try telling the truth</p>
+</li>
+<li><p>Honor but don’t indulge your own dark side</p>
+</li>
+<li><p>Set your priorities</p>
+</li>
+<li><p>Make commitments. Take action</p>
+</li>
+<li><p>Get on the path of mastery and stay on it</p>
+</li>
+</ul>
+<p><strong>Pitfalls along the path</strong></p>
+<ul>
+<li><p>Conflicting way of life</p>
+</li>
+<li><p>Obsessive goal orientation</p>
+</li>
+<li><p>Poor instruction</p>
+</li>
+<li><p>Lack of competitiveness</p>
+</li>
+<li><p>Over Competitiveness</p>
+</li>
+<li><p>Laziness</p>
+</li>
+<li><p>Injuries</p>
+</li>
+<li><p>Drugs</p>
+</li>
+<li><p>Prizes and medals</p>
+</li>
+<li><p>Vanity</p>
+</li>
+<li><p>Dead seriousness</p>
+</li>
+<li><p>Inconsistency</p>
+</li>
+<li><p>Perfectionism</p>
+</li>
+</ul>
+<p>Goals and contingencies are important, sure, but they exist in the future and in the past.</p>
+<p>Practice, the path of mastery exists only in the present state.</p>
+<p>To love the plateau is to love the external learning. Enjoy the accomplishments and accept the plateau that waits just beyond them.</p>
+<p>Be in the hands of a master teacher.</p>
+<ol>
+<li><p>Teacher mentor.</p>
+</li>
+<li><p>Practice staying on the path. The ups/downs barriers of the ego but it will lead to mastery.and staying on the path</p>
+</li>
+<li><p>Surrender</p>
+</li>
+<li><p>Intentionality</p>
+</li>
+<li><p>The edge.</p>
+</li>
+</ol>
+<p>Early stages of learning you should have the spirit of the fool. Learning any kind of skill involves certain indignities. First few dives are sure to be belly flops, and everyone is bound to see them.</p>
+<p>If you want to get there, be prepared to take it.</p>
+<p>Surrendering to your teacher and to the fundamentals of the art are only the beginning.</p>
+<p>Surrender means there are no experts, only learners.</p>
+<p>Mental game is 50% visualization</p>
+<p>40% setup</p>
+<p>10% swing</p>
+<p>Every master is a master of vision.</p>
+<p><strong>Tools</strong></p>
+<ol>
+<li><p>Why resolutions fail.</p>
+<ol>
+<li><p>Homeostasis wants things to go back to the baseline normal. It is humane nature.</p>
+</li>
+<li><p>Be aware of how homeostatis works</p>
+<ol>
+<li><p>Social homeostatyis, also is a big impact.</p>
+</li>
+<li><p>Be prepated to experience falling back to the baseline</p>
+</li>
+</ol>
+</li>
+<li><p>Be willing to understand an notice your resistance to change.</p>
+</li>
+</ol>
+</li>
+<li><p>Develop a support system.</p>
+</li>
+<li><p>Follow regular practice.</p>
+</li>
+<li><p>Habit provides a help against homeostatis.</p>
+</li>
+<li><p>Dedicate yourself to lifelong learning</p>
+</li>
+</ol>
+<p>To learn is to change….educate, books, behavior, changes the learner</p>
+<p>The path of learning never ends…..</p>
+<p>Getting energy for master</p>
+<p>Best remedy for alertness if aerobic exercise.</p>
+<ol>
+<li><p>Maintain physical fitness.</p>
+</li>
+<li><p>Acknowledge the negative and accentuate the positive.</p>
+</li>
+</ol>
+<p>Me: I’m not as good of a programmer that I’d like to be. Not much of a social life outside of the college bunch not as good with the ladies yet as I’d like to be, I sleep in late and go to work late.</p>
+<ol>
+<li>Try telling the truth</li>
+</ol>
+<p>4 .Set your priorities.</p>
+<pre><code>A, B, C, D etc. of the day/week.
+</code></pre><ol>
+<li><p>Make commitments and take action.</p>
+</li>
+<li><p>Get on the path to mastery and stay on it.</p>
+</li>
+</ol>
+<p>Inconsistency is my biggest pitfall.</p>
+<p>Consistency is the practice if the mark of the master.</p>
+<p>Continuity of time and place can establish a rhythum that bouys you up and carries you along your path.</p>
+<p> Remember, most of life if in-btween time. That is it is waking up, getting, dress, commuting, working until llunch, taking lunch, working to 5,..NONE OF THAT COUNTS..but it should and does!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://franklynroth.me/blog/blog/2016/11/23/Mastery/" data-id="cj0k9kapt000ocguts599ic03" class="article-share-link">Share</a>
+      
+        <a href="https://franklynroth.me/blog/blog/2016/11/23/Mastery/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/book/">book</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Naming-things" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/07/13/Naming-things/" class="article-date">
+  <time datetime="2016-07-13T06:00:00.000Z" itemprop="datePublished">2016-07-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/07/13/Naming-things/">Naming Things</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p></p><h1>Naming</h1><p></p>
+<p><br>Naming things is hard, really hard and if done poorly it can make your code really confusing and hard to follow. Typically you want them to avoid having function named as nouns. Choose to name them as verbs. Because they are usually doing something. Much like the great early 00’s commercials of “Verb: It’s what you do.”<br></p>
+
+<iframe width="420" height="315" src="https://www.youtube.com/embed/sxcsKE1SS4Y" frameborder="0" allowfullscreen></iframe>
+
+<p><ul><br>Some helpful tips I’ve been given<br>  <li> Have function names that are unique</li><br>  <li> Go over naming conventions with other developers.</li><br>  <li> Always come back to “What is this function doing?”</li><br>  <li> Be consistent in your naming conventions.</li><br>  <li> Break up the function so its only doing one thing. If it does more than one thing then it’s probably a good idea to extrapolate it.</li></ul></p>
+<p><br>  A common approach is either <code>GetSomethingBySomething(string something)</code> or <code>SetSomething()</code><br></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://franklynroth.me/blog/blog/2016/07/13/Naming-things/" data-id="cj0k9kaq9000tcgutxku1teor" class="article-share-link">Share</a>
+      
+        <a href="https://franklynroth.me/blog/blog/2016/07/13/Naming-things/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/naming/">naming</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Coding-conventions" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/07/06/Coding-conventions/" class="article-date">
+  <time datetime="2016-07-06T06:00:00.000Z" itemprop="datePublished">2016-07-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/07/06/Coding-conventions/">Coding Conventions</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1>Naming Conventions</h1>
+
+<p><br>Naming conventions can be tricky and when working on a project with other developers you all need to be on the same page. Most companies adopt some form of coding conventions that developers must follow. There are also some very common industry wide ones as well which I will cover here.<br></p><br>  <h2><br>    Starting with an Underscore before the property names.<br>  </h2><br>    <p><br>      If you see a variable that is preceded with an <code>_</code>. It’s a naming convention to remind the developer that the variable or property is either <code>private</code> or <code>protected</code> can cannot be accessed from outside the class.<br>    </p>
+
+<p><br>If you see a file name or html partial with the naming convention it’s to remind you that this page is not intended to be served directly. It says to people “hey, this is a partial view.”<br></p>
+
+<h2><br>  Single Letter Prefixes aka Hungarian Notation.<br></h2>
+
+<p><br>Hungarian notation is a naming convention that lets the developer know what the type of variable they are working with. Be it string, int etc.<br></p><br><code><br><code>iMyAge = 26</code><br>sMyName = “Frank”<br>var $container = $(‘#container’);<br></code><br><br><h2><br>camelCase<br></h2><br><p><br>Depending on the company you are working at or the project you are contribuiting to. Some places use <code>camelCase</code> where the first word letter is lowercase and the 2nd word is Uppercase. You have seen this in real day to day life with iPhone, eCommerce<br></p>
+
+<h2><br>Conclusion<br></h2>
+
+<p><br>  The specific conventions that you use are not paramount, because their are a lot of different ones out there. Even holy wars against using tabs vs spaces. The most important thing is to be consistent with that the group has been using in the project or company.  You can read much more about Coding Conventions at the following link. <a href="https://en.wikipedia.org/wiki/Coding_conventions" target="_blank">https://en.wikipedia.org/wiki/Coding_conventions</a><br></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://franklynroth.me/blog/blog/2016/07/06/Coding-conventions/" data-id="cj0k9kape0008cgutjtglivkg" class="article-share-link">Share</a>
+      
+        <a href="https://franklynroth.me/blog/blog/2016/07/06/Coding-conventions/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/oop/">oop</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Recap-bools" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/06/29/Recap-bools/" class="article-date">
+  <time datetime="2016-06-29T06:00:00.000Z" itemprop="datePublished">2016-06-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/06/29/Recap-bools/">Recap and booleans.</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p></p><h1>A quick recap</h1><p></p>
+<ul><br>  <li>You don’t have to capitalize class names for the program to compile, but is a good idea/coding convention to do so.</li><br>  <li><code>readonly</code> fields can be set only during object construction</li><br>  <li>Constructors cannot return anything, they are void methods.</li><br>  <li>Public fields are directly accessible from outside the class</li><br>  <li>Private fields can only be accessed from within the class they are defined in</li><br></ul>
+
+<p></p><h2>Boolean Values</h2><p></p>
+<p><br> Boolean values are essential to know. We want to create a Method (behavior) of the map that will let us know if a particular point is in bounds or not. an <code>OnMap</code> method is an example. We would have a boolean (True/False) variable where if the width or height are greater than the map values passed in then the <code>OnMap</code> method would return false. Letting you know the point is not on the map.<br> </p><br> <p><br> C# uses a practice called short-circuiting. This means that it will try and do as little work as possible when evaluating a Boolean expression. Some operators include <code>||</code>, <code>&amp;&amp;</code>, and the <code>!</code>.<br> </p><br> <p><br> More info can be found at the following links about <a href="https://msdn.microsoft.com/en-us/library/2a723cdk.aspx" target="_"blank"">&amp;&amp;</a>, <a href="https://msdn.microsoft.com/en-us/library/6373h346.aspx" target="_"blank"">||</a> and  <a href="https://msdn.microsoft.com/en-us/library/f2kd6eb2.aspx" target="_"blank""></a><br> </p>
+
+ <p>Knowing how these operators work in your sleep will definately help you along in all aspects of development. It also sometimes comed in handy in life when making choices between one thing or another.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://franklynroth.me/blog/blog/2016/06/29/Recap-bools/" data-id="cj0k9kaq9000vcgutlunptkn0" class="article-share-link">Share</a>
+      
+        <a href="https://franklynroth.me/blog/blog/2016/06/29/Recap-bools/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/oop/">oop</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Constructors" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/06/22/Constructors/" class="article-date">
+  <time datetime="2016-06-22T06:00:00.000Z" itemprop="datePublished">2016-06-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/06/22/Constructors/">Constructors.</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Constructors confused me for a while, but once you understand the basics of OOP, fields, objects etc it becomes easier to grasp the concepts of them and why they are necessary in OOP. It deals with object initalization. When we gave the properties of the map to Width and Height we weren’t doing anything with them. This is where a constructor comes in to construct new instances of a class.</p>
+
+<p><br>Conventions tell us that we need to name the constructor the same name as the class and make sure you put public in front of it or else it will be private by default and useless! A quick tip if you are using visual studio is to type out “ctor” and then hit tab tab. Their are so many more useful snippets at <a href="http://www.dotnetperls.com/snippet" target="_blank">this web address.</a> This constructor is called when the object is created. Make sure to put the parameters in the signature.<br></p>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Public Map(int width, int height)</div><div class="line">&#123;</div><div class="line">  Width = width;</div><div class="line">  height = height;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><br>Lowercase letters are convention and are method level variables. That means they only exist in the constructor method and local to the scope of the constructor. The instance variables are accessible thought the class and possible other classes as well. We may need other objects to know about the Map width and height.<br></p><br><p>When we initalize the objects field with values, sometimes we want to be able to change the values. Should the map values be allowed to change? Probably not. So making the fields <code>readonly</code> will help ensure that the Map size and coordinates doesn’t change. If this were to happen their would be a lot of wierd errors going on down the line.<br></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://franklynroth.me/blog/blog/2016/06/22/Constructors/" data-id="cj0k9kapt000ccguto1r129zq" class="article-share-link">Share</a>
+      
+        <a href="https://franklynroth.me/blog/blog/2016/06/22/Constructors/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/oop/">oop</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Fields" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/06/08/Fields/" class="article-date">
+  <time datetime="2016-06-08T06:00:00.000Z" itemprop="datePublished">2016-06-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/06/08/Fields/">Fields</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>When assind fields or properties to a class you need to think about what attributes that a class has. Ideally you want to set the minimal amount of attributes. A super simple example would be a map. It can be divided into X for the width and Y for the height. You start adding fields by listing the protection level, the type and then finally the name.</p><br><p><br>Every field in a class has an accessibility level, meanind how protected they make the declared properties. Their are private, protected and public.<br></p><br><ul><br>  <li>Public: The field can be accessed by any method in any class.</li><br>  <li>Private: The field can be accessed by only the same class they were declared in. This is the default value.</li><br>  <li>Protected: The field can be accessed by only the current class and subclasses</li><br></ul><br><br><code>private int Width</code><br><code>private int Height</code><br><br><p>Next up we will cover how to use these fields with constructors.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://franklynroth.me/blog/blog/2016/06/08/Fields/" data-id="cj0k9kapt000fcgutkjods8qx" class="article-share-link">Share</a>
+      
+        <a href="https://franklynroth.me/blog/blog/2016/06/08/Fields/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/oop/">oop</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Types" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/06/08/Types/" class="article-date">
+  <time datetime="2016-06-08T06:00:00.000Z" itemprop="datePublished">2016-06-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/06/08/Types/">Types, Classes and Objects.</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>In OOP every object is of a certain type. Whenever you use <code>int</code>, <code>double</code>, <code>string</code> etc these are types. You can create your own objects for a particular type as well. This is done with using a class.<br></p>
+
+<p></p><p>An easy way to think of a class is a cookie cutter. The cookie cutter is the class or template on how to make cookies. It is not a cookie itself, just a template. Classes are templates for amking objects of a particular type. Each time a cookie is create it is called an instance of that Cookie class. You can make many copies of cookies over and ocer and can make them a little different by changing their attributes.</p>
+<p>
+
+</p><p></p><p><br>Typically you would declare a class with an uppercase letter.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">namespace Bake</div><div class="line">&#123;</div><div class="line">  class Cookie</div><div class="line">  &#123;</div><div class="line">    public Void Main()</div><div class="line">    &#123;</div><div class="line">      Cookie cookie = = new Cookie();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p></p><p>The above code create a new variable called cookie and assigns it to a new Cookie object. Typically you want to keep the variables a meaningful name. This is how to instnatiate an object from the Cookie class.<br></p><p></p>
+<p></p><p>So to recap</p><br>  <ul><br>  <li>“Frank” is an object of type string.</li><br>  <li>The <code>new</code> keyword is used to create a new object or instance of that class</li><br>  <li>In a GUI, each individual button is a distinct object.</li><br>  <li>Classes are templates from which objects are created from</li><br></ul><p></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://franklynroth.me/blog/blog/2016/06/08/Types/" data-id="cj0k9kaqp0010cgutuhl0tn8l" class="article-share-link">Share</a>
+      
+        <a href="https://franklynroth.me/blog/blog/2016/06/08/Types/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/oop/">oop</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><a class="extend next" rel="next" href="/blog/page/2/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/2016/" style="font-size: 13.33px;">2016</a> <a href="/blog/tags/Book-Review/" style="font-size: 10px;">Book Review</a> <a href="/blog/tags/accessibility/" style="font-size: 10px;">accessibility</a> <a href="/blog/tags/api/" style="font-size: 10px;">api</a> <a href="/blog/tags/basics/" style="font-size: 10px;">basics</a> <a href="/blog/tags/book/" style="font-size: 13.33px;">book</a> <a href="/blog/tags/bootstrap/" style="font-size: 10px;">bootstrap</a> <a href="/blog/tags/border-box/" style="font-size: 10px;">border-box</a> <a href="/blog/tags/css/" style="font-size: 16.67px;">css</a> <a href="/blog/tags/git/" style="font-size: 10px;">git</a> <a href="/blog/tags/html/" style="font-size: 10px;">html</a> <a href="/blog/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/blog/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/blog/tags/less/" style="font-size: 10px;">less</a> <a href="/blog/tags/motivation/" style="font-size: 10px;">motivation</a> <a href="/blog/tags/naming/" style="font-size: 10px;">naming</a> <a href="/blog/tags/oop/" style="font-size: 20px;">oop</a> <a href="/blog/tags/pre-work/" style="font-size: 13.33px;">pre-work</a> <a href="/blog/tags/preprocessor/" style="font-size: 10px;">preprocessor</a> <a href="/blog/tags/sourcecontrol/" style="font-size: 10px;">sourcecontrol</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2013/05/">May 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2017/03/19/Android-s-keyboard-messes-with-viewport-dimension/">Android&#39;s keyboard messes with viewport dimension</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/03/06/Learning-react-resources/">Resources I am using to learn react</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2016/11/23/So-good-they-cant-ignore-you/">So good they can&#39;t ignore you</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2016/11/23/Mastery/">Mastery</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2016/07/13/Naming-things/">Naming Things</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Franklyn Roth<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/blog" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'franklynroth';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog/js/script.js"></script>
+
+  </div>
+</body>
+</html>
