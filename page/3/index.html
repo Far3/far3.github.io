@@ -66,9 +66,9 @@ ga('send', 'pageview');
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://franklynroth.me/blog"></form>
@@ -78,57 +78,6 @@ ga('send', 'pageview');
 </header>
       <div class="outer">
         <section id="main">
-  
-    <article id="post-Border-box" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2013/05/31/Border-box/" class="article-date">
-  <time datetime="2013-05-31T06:00:00.000Z" itemprop="datePublished">2013-05-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2013/05/31/Border-box/">What exactly does {box-sizing:border-box} do?</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>box-sizing: border-box</code></p>
-<p>I first  came across border-box during an assignment on making my own css column layouts from scratch. Those examples can be found <a href="http://codepen.io/franklynroth/pen/BoKvPp" target="_blank" rel="external">here</a> and <a href="http://codepen.io/franklynroth/pen/BoKvPp" target="_blank" rel="external">here</a>. I won’t delve into them right now, but will explain what <code>box-sizing: border-box</code> actually does.</p>
-<p>According to the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing" target="_blank" rel="external">MDN</a>{:target=”_blank”}, <code>content-box</code> is the default style of the <code>box-sizing</code> property. This means that <q>the width and height properties are measured including only the content, but not the padding, border or margin.</q> <code>border-box</code> means that <q>the width and height properties include the padding and border, but not the margin.</q></p>
-<p>Now if you are like me, I needed to build a codepen example to truly understand what I ust read. Take a guess at what will happen to the code below. Then scroll down for the result.</p>
-<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content-box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"border-box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>     </div></pre></td></tr></table></figure>
-<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.content-box</span>&#123;</div><div class="line">  <span class="attribute">background-color</span>:tomato;</div><div class="line">  <span class="attribute">width</span>:<span class="number">350px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">100px</span>;</div><div class="line">  <span class="attribute">border</span>: <span class="number">10px</span> solid black;</div><div class="line"> &#125;</div><div class="line"><span class="selector-class">.border-box</span>&#123;</div><div class="line">  <span class="attribute">background-color</span>:seagreen;</div><div class="line">  <span class="attribute">box-sizing</span>:border-box;</div><div class="line">  <span class="attribute">width</span>:<span class="number">350px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">100px</span>;</div><div class="line">  <span class="attribute">border</span>: <span class="number">10px</span> solid black;</div><div class="line">  <span class="attribute">margin-top</span>:<span class="number">10px</span>;</div><div class="line"> &#125;</div><div class="line"> </div></pre></td></tr></table></figure>
-<p>Check out the size of the red and green divs for yourself by hovering over them after pressing<code>CTRL + SHIFT + C</code> in chrome and notice the difference. The only propery that has changed other than the color is <code>box-sizing:border-box;</code> on the <code>.border-box</code> div.</p>
-<p></p><p data-height="268" data-theme-id="0" data-slug-hash="OyNBKB" data-default-tab="result" data-user="franklynroth" class="codepen">See the Pen <a href="http://codepen.io/franklynroth/pen/OyNBKB/" target="_blank" rel="external">border-box functional example.</a> by Franklyn (<a href="http://codepen.io/franklynroth" target="_blank" rel="external">@franklynroth</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-
-<p>In short, the <code>border: 10px solid black;</code>is taken into account when calculating the <code>width:350px</code> and <code>height:100px</code> of the green div. This shrinks the content area down to 330px by 80px to ensure that the entire element takes up the declared height and width of 350px by 100px instead of taking up a larger area than initially declared like the red div does at 380px by 120px.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://franklynroth.me/blog/blog/2013/05/31/Border-box/" data-id="cj0k8av7p0006n8utr2k26y0p" class="article-share-link">Partager</a>
-      
-        <a href="https://franklynroth.me/blog/blog/2013/05/31/Border-box/#disqus_thread" class="article-comment-link">Commentaires</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/border-box/">border-box</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/pre-work/">pre-work</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
   
     <article id="post-Fixed-header-on-scroll" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -167,12 +116,63 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://franklynroth.me/blog/blog/2013/05/31/Fixed-header-on-scroll/" data-id="cj0k8av85000kn8uthlcq3c5b" class="article-share-link">Partager</a>
+      <a data-url="https://franklynroth.me/blog/blog/2013/05/31/Fixed-header-on-scroll/" data-id="cj0k8d0br000hu8utqso2fdrm" class="article-share-link">Share</a>
       
-        <a href="https://franklynroth.me/blog/blog/2013/05/31/Fixed-header-on-scroll/#disqus_thread" class="article-comment-link">Commentaires</a>
+        <a href="https://franklynroth.me/blog/blog/2013/05/31/Fixed-header-on-scroll/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/api/">api</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/jquery/">jquery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/pre-work/">pre-work</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Border-box" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2013/05/31/Border-box/" class="article-date">
+  <time datetime="2013-05-31T06:00:00.000Z" itemprop="datePublished">2013-05-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2013/05/31/Border-box/">What exactly does {box-sizing:border-box} do?</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>box-sizing: border-box</code></p>
+<p>I first  came across border-box during an assignment on making my own css column layouts from scratch. Those examples can be found <a href="http://codepen.io/franklynroth/pen/BoKvPp" target="_blank" rel="external">here</a> and <a href="http://codepen.io/franklynroth/pen/BoKvPp" target="_blank" rel="external">here</a>. I won’t delve into them right now, but will explain what <code>box-sizing: border-box</code> actually does.</p>
+<p>According to the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing" target="_blank" rel="external">MDN</a>{:target=”_blank”}, <code>content-box</code> is the default style of the <code>box-sizing</code> property. This means that <q>the width and height properties are measured including only the content, but not the padding, border or margin.</q> <code>border-box</code> means that <q>the width and height properties include the padding and border, but not the margin.</q></p>
+<p>Now if you are like me, I needed to build a codepen example to truly understand what I ust read. Take a guess at what will happen to the code below. Then scroll down for the result.</p>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content-box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"border-box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>     </div></pre></td></tr></table></figure>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.content-box</span>&#123;</div><div class="line">  <span class="attribute">background-color</span>:tomato;</div><div class="line">  <span class="attribute">width</span>:<span class="number">350px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">100px</span>;</div><div class="line">  <span class="attribute">border</span>: <span class="number">10px</span> solid black;</div><div class="line"> &#125;</div><div class="line"><span class="selector-class">.border-box</span>&#123;</div><div class="line">  <span class="attribute">background-color</span>:seagreen;</div><div class="line">  <span class="attribute">box-sizing</span>:border-box;</div><div class="line">  <span class="attribute">width</span>:<span class="number">350px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">100px</span>;</div><div class="line">  <span class="attribute">border</span>: <span class="number">10px</span> solid black;</div><div class="line">  <span class="attribute">margin-top</span>:<span class="number">10px</span>;</div><div class="line"> &#125;</div><div class="line"> </div></pre></td></tr></table></figure>
+<p>Check out the size of the red and green divs for yourself by hovering over them after pressing<code>CTRL + SHIFT + C</code> in chrome and notice the difference. The only propery that has changed other than the color is <code>box-sizing:border-box;</code> on the <code>.border-box</code> div.</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="OyNBKB" data-default-tab="result" data-user="franklynroth" class="codepen">See the Pen <a href="http://codepen.io/franklynroth/pen/OyNBKB/" target="_blank" rel="external">border-box functional example.</a> by Franklyn (<a href="http://codepen.io/franklynroth" target="_blank" rel="external">@franklynroth</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>In short, the <code>border: 10px solid black;</code>is taken into account when calculating the <code>width:350px</code> and <code>height:100px</code> of the green div. This shrinks the content area down to 330px by 80px to ensure that the entire element takes up the declared height and width of 350px by 100px instead of taking up a larger area than initially declared like the red div does at 380px by 120px.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://franklynroth.me/blog/blog/2013/05/31/Border-box/" data-id="cj0k8d0b90005u8ut5wd0am36" class="article-share-link">Share</a>
+      
+        <a href="https://franklynroth.me/blog/blog/2013/05/31/Border-box/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/border-box/">border-box</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/pre-work/">pre-work</a></li></ul>
 
     </footer>
   </div>
@@ -192,7 +192,7 @@ ga('send', 'pageview');
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/blog/tags/2016/" style="font-size: 13.33px;">2016</a> <a href="/blog/tags/Book-Review/" style="font-size: 10px;">Book Review</a> <a href="/blog/tags/accessibility/" style="font-size: 10px;">accessibility</a> <a href="/blog/tags/api/" style="font-size: 10px;">api</a> <a href="/blog/tags/basics/" style="font-size: 10px;">basics</a> <a href="/blog/tags/book/" style="font-size: 13.33px;">book</a> <a href="/blog/tags/bootstrap/" style="font-size: 10px;">bootstrap</a> <a href="/blog/tags/border-box/" style="font-size: 10px;">border-box</a> <a href="/blog/tags/css/" style="font-size: 16.67px;">css</a> <a href="/blog/tags/git/" style="font-size: 10px;">git</a> <a href="/blog/tags/html/" style="font-size: 10px;">html</a> <a href="/blog/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/blog/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/blog/tags/less/" style="font-size: 10px;">less</a> <a href="/blog/tags/motivation/" style="font-size: 10px;">motivation</a> <a href="/blog/tags/naming/" style="font-size: 10px;">naming</a> <a href="/blog/tags/oop/" style="font-size: 20px;">oop</a> <a href="/blog/tags/pre-work/" style="font-size: 13.33px;">pre-work</a> <a href="/blog/tags/preprocessor/" style="font-size: 10px;">preprocessor</a> <a href="/blog/tags/sourcecontrol/" style="font-size: 10px;">sourcecontrol</a>
     </div>
@@ -211,7 +211,7 @@ ga('send', 'pageview');
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -248,7 +248,7 @@ ga('send', 'pageview');
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Franklyn Roth<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
