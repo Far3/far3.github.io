@@ -2,8 +2,7 @@
 My personal portfolio page landing page.
 
 To develop
-* gulp watch
-*Static html/css file. Not a whole lot going on to keep it fast and lightweight.
+* Static html/css file. Not a whole lot going on to keep it fast and lightweight.
 
 To deploy
 * Make your changes
